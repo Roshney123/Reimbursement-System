@@ -1,0 +1,30 @@
+services:
+  web1:
+    image: spring-boot-reimbursement
+    container_name: rb-app
+    restart: always
+    environment:
+      - MY_PORT=7000
+      - DB_URL=jdbc:mysql://34.130.172.43:3306/Reimbursement4
+      - DB_USERNAME=root
+      - DB_PASSWORD=Roshney@123
+
+    ports:
+      - 7000:7000
+    depends_on:
+      - dbmysql
+
+  web2:
+    image: email-api
+    container_name: email-app
+    restart: always
+    ports:
+      - 8000:8000
+
+  dbmysql:
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=Roshney@123
+      - MYSQL_DATABASE=Reimbursement4
+      - MYSQL_ROOT_USER=root
+      - MYSQL_PASSWORD=Roshney@123
